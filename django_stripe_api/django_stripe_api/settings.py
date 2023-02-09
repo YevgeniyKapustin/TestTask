@@ -1,4 +1,4 @@
-"""Django settings for django_stripe_api project. Using Django 3.2.12."""
+"""Django settings for django_stripe_api project. Using Django 4.1.6."""
 import os
 from pathlib import Path
 
@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'main.apps.MainConfig',
+    'home.apps.MainConfig',
 ]
 
 MIDDLEWARE = [
