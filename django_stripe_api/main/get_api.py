@@ -1,15 +1,7 @@
-import stripe
-from django.shortcuts import render, redirect
-
-from main.get_api import get_session_id_for_item
+import stripe as stripe
 
 
-def index(request):
-    print(get_session_id_for_item())
-    return render(request, 'main/index.html')
-
-
-def session_id_for_item(request) -> int:
+def get_session_id_for_item() -> int:
     session = stripe.checkout.Session.create(
         line_items=[{
             'price_data': {
@@ -24,4 +16,4 @@ def session_id_for_item(request) -> int:
         mode='payment',
         success_url='http://127.0.0.1:8000/',
     )
-    return redirect(session.url, code=303)
+    return session.id
