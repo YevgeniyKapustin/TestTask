@@ -1,12 +1,12 @@
 import stripe
 from django.shortcuts import render, redirect
 
-from main.get_api import get_session_id_for_item
+from home.get_api import get_session_id_for_item
 
 
 def index(request):
     print(get_session_id_for_item())
-    return render(request, 'main/index.html')
+    return render(request, 'home/index.html')
 
 
 def session_id_for_item(request) -> int:
