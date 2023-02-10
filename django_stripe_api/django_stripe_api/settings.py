@@ -20,7 +20,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'home.apps.MainConfig',
+    'rest_framework',
+
+    'item.apps.MainConfig',
 ]
 
 MIDDLEWARE = [
@@ -104,3 +106,10 @@ INTERNAL_IPS = [
 ]
 
 stripe.api_key = 'sk_test_51MZWQKA3rxcevihulVA15CTfOnGbLzpHgCK1Zev4vcwkQLcuwAfQAxTSkE5FizBjfoWtHHl7mDJE5VkOV0upbVW400hBsVdE6K'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+    ],
+    'PAGE_SIZE': 10
+}
