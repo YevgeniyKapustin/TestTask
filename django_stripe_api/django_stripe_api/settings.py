@@ -92,20 +92,16 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'django_stripe_api/static')
-]
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 
 INTERNAL_IPS = [
     "127.0.0.1"
 ]
 
 stripe.api_key = 'sk_test_51MZWQKA3rxcevihulVA15CTfOnGbLzpHgCK1Zev4vcwkQLcuwAfQAxTSkE5FizBjfoWtHHl7mDJE5VkOV0upbVW400hBsVdE6K'
+public_key = 'pk_test_51MZWQKA3rxcevihukSUdGUjubJOiUWDnhWqkRN0JcX7aD2fR2yd4nc2spXm02UI4DNNdj9g8nKG1vZFOkVI0mp5j00HVYEvn57'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
