@@ -6,6 +6,6 @@
     <h1>Name: {{ item.name }}</h1>
     <p>Description: {{ item.description }}</p>
     <p>Price: {{ item.price }}</p>
-    <a href="http://127.0.0.1:8000/buy/{{ item.pk }}/">Buy</a>
+    <a href="{% url 'buy' item.pk %}">Buy</a>
   </body>
 </html>
