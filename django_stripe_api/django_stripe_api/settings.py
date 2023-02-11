@@ -6,7 +6,7 @@ import stripe
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-$j)m^qpj)b8u-m+b*_xf@!t0@2c4t=l%cao_x%@1k(dl%%bw1g'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
@@ -58,9 +58,9 @@ WSGI_APPLICATION = 'django_stripe_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'stripe_db',
-        'USER': 'kapusta',
-        'PASSWORD': '666',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': 'localhost',
     }
 }
@@ -100,8 +100,8 @@ INTERNAL_IPS = [
     "127.0.0.1"
 ]
 
-stripe.api_key = 'sk_test_51MZWQKA3rxcevihulVA15CTfOnGbLzpHgCK1Zev4vcwkQLcuwAfQAxTSkE5FizBjfoWtHHl7mDJE5VkOV0upbVW400hBsVdE6K'
-public_key = 'pk_test_51MZWQKA3rxcevihukSUdGUjubJOiUWDnhWqkRN0JcX7aD2fR2yd4nc2spXm02UI4DNNdj9g8nKG1vZFOkVI0mp5j00HVYEvn57'
+stripe.STRIPE_API_KEY = os.getenv('STRIPE_API_KEY')
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
