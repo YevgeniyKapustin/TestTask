@@ -57,7 +57,7 @@ WSGI_APPLICATION = 'django_stripe_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('DB_NAME'),
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
@@ -100,11 +100,5 @@ INTERNAL_IPS = [
     "127.0.0.1"
 ]
 
-stripe.STRIPE_API_KEY = os.getenv('STRIPE_API_KEY')
+stripe.api_key = os.getenv('STRIPE_API_KEY')
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
-
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAdminUser',
-    ],
-}
