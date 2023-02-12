@@ -1,22 +1,23 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Buy {{ item.name }}</title>
-    <script src="https://js.stripe.com/v3/"></script>
-  </head>
-  <body>
-    <h1>Name: {{ item.name }}</h1>
-    <p>Description: {{ item.description }}</p>
-    <p>Price: {{ item.price }}</p>
-    <button id="buy-button">Buy</button>
-    <script type="text/javascript">
-      var stripe = Stripe('{{ public_key }}');
-      var buyButton = document.getElementById('buy-button');
-      buyButton.addEventListener('click', function() {
+{% extends 'base.html' %}
+
+{% block title %}
+Buy {{ item.name }}
+{% endblock %}
+
+{% block content %}
+<h1>Name: {{ item.name }}</h1>
+<p>Description: {{ item.description }}</p>
+<p>Price: {{ item.price }}</p>
+<button id="buy-button">Buy</button>
+<script type="text/javascript">
+    var stripe = Stripe('{{ public_key }}');
+    var buyButton = document.getElementById('buy-button');
+    buyButton.addEventListener('click', function() {
         fetch('{% url 'buy' item.pk %}')
         .then(response => response.json())
-        .then(session_id => stripe.redirectToCheckout({ sessionId: session_id }))
-        });
-    </script>
-  </body>
-</html>
+        .then(session_id => stripe.redirectToCheckout(
+        { sessionId: session_id }))});
+
+
+</script>
+{% endblock %}
