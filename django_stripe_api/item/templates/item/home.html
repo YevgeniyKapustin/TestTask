@@ -39,6 +39,7 @@ Home page
                 {% for item in order_items %}
                     <div class="list-group-item">{{ item }}</div>
                 {% endfor %}
+                Total:  {{ total_price }}
             {% else %}
                 <h5>You have not added items to the order yet</h5>
             {% endif %}

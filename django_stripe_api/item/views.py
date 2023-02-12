@@ -20,6 +20,7 @@ def home(request):
     context = {
         'items': Item.objects.all(),
         'public_key': STRIPE_PUBLIC_KEY,
-        'order_items': OrderItem.objects.filter(order=order)
+        'order_items': OrderItem.objects.filter(order=order),
+        'total_price': order.sum_order()
     }
     return render(request, 'item/home.html', context)

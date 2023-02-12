@@ -1,8 +1,18 @@
 from django.db import models
+from django.shortcuts import get_object_or_404
+
+from item.models import Item
 
 
 class Order(models.Model):
     session_key = models.CharField(max_length=50)
+
+    def sum_order(self):
+        items = OrderItem.objects.filter(order=self)
+        price = 0
+        for i in items:
+            price += i.sum_item()
+        return price
 
 
 class OrderItem(models.Model):
@@ -11,4 +21,7 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
-        return f'{self.quantity} {self.item.name}'
+        return f'{self.quantity} {self.item.name} {self.sum_item()}'
+
+    def sum_item(self):
+        return self.item.price * self.quantity
