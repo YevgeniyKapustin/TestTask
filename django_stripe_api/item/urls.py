@@ -1,8 +1,8 @@
 from django.urls import path
 
-from item.views import show_item, redirect_to_first_item
+from item.views import show_item, home
 
 urlpatterns = [
     path('item/<int:pk>/', show_item, name='item'),
-    path('', redirect_to_first_item, name='home')
+    path('', home, name='home')
 ]

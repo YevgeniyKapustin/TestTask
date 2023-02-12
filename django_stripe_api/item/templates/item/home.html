@@ -8,7 +8,7 @@ Home page
 <div class="row">
     <div class="col-md-9">
         <div class="row row-cols-md-4">
-            {% if object_list %}
+            {% if items %}
                 {% for item in items %}
                 <div class="col">
                     <div class="card mb-3" style="max-width: 18rem;">
@@ -18,21 +18,31 @@ Home page
                             <p class="card-text">Price :{{ item.price }}</p>
                             <div class="card-footer">
                                 <a href="{% url 'item' item.pk %}" class="btn">Detail</a>
-                                <a href="" class="btn">Add to order</a>
+                                <form action="{% url 'add_item_to_order' item.pk %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn" value="Add to order" name="add_to_order"/>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
             {% else %}
-            <h5>No items have been created yet</h5>
+                <h5>No items have been created yet</h5>
             {% endif %}
         </div>
     </div>
-    <ul class="list-group">
-        {% for item in order %}
-            <li class="list-group-item">{{ item.name }}</li>
-        {% endfor %}
-    </ul>
+    <div class="col-md-3">
+        <div class="list-group">
+            <h3>Order:</h3>
+            {% if order_items %}
+                {% for item in order_items %}
+                    <div class="list-group-item">{{ item }}</div>
+                {% endfor %}
+            {% else %}
+                <h5>You have not added items to the order yet</h5>
+            {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}
