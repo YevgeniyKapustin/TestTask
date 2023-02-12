@@ -7,6 +7,7 @@ import stripe
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
+stripe.api_key = os.getenv('STRIPE_API_KEY')
 
 DEBUG = True
 
@@ -22,6 +23,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
+    'order.apps.OrdersConfig',
     'item.apps.MainConfig',
 ]
 
@@ -40,7 +42,7 @@ ROOT_URLCONF = 'django_stripe_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -100,5 +102,4 @@ INTERNAL_IPS = [
     "127.0.0.1"
 ]
 
-stripe.api_key = os.getenv('STRIPE_API_KEY')
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
