@@ -21,6 +21,7 @@ def home(request):
         'items': Item.objects.all(),
         'public_key': STRIPE_PUBLIC_KEY,
         'order_items': OrderItem.objects.filter(order=order),
-        'total_price': order.sum_order()
+        'total_price': order.sum_order(),
+        'order_pk': order.pk
     }
     return render(request, 'item/home.html', context)

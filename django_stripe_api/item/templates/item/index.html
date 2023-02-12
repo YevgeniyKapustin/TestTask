@@ -17,7 +17,5 @@ Buy {{ item.name }}
         .then(response => response.json())
         .then(session_id => stripe.redirectToCheckout(
         { sessionId: session_id }))});
-
-
 </script>
 {% endblock %}
