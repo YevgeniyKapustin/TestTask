@@ -11,10 +11,10 @@ class ItemAPIView(viewsets.ViewSet):
     @staticmethod
     def session_id_for_item(request, pk=None):
         item = get_object_or_404(Item, pk=pk)
-        session = get_stripe_session_for_item(item)
+        session = get_stripe_session_for_item(request, item)
         return Response(session.id)
 
     @staticmethod
     def session_id_for_order(request, order_pk, pk=None):
-        session = get_stripe_session_for_order(order_pk)
+        session = get_stripe_session_for_order(request, order_pk)
         return Response(session.id)

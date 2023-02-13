@@ -6,7 +6,7 @@ from order.models import Order, OrderItem
 def get_or_create_order(session_key):
     order = Order.objects.filter(session_key=session_key)
     if not order:
-        order = Order.objects.create(session_key=session_key)[0]
+        order = Order.objects.create(session_key=session_key)
     return order
 
 
@@ -17,3 +17,7 @@ def add_item_to_order(order, item):
     else:
         order = OrderItem.objects.create(order=order, item=item)
     return order
+
+
+def delete_order(order_pk):
+    return Order.objects.get(pk=order_pk).delete()

@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, get_object_or_404
 
 from item.models import Item
-from order.order import get_or_create_order, add_item_to_order
+from order.order import get_or_create_order, add_item_to_order, delete_order
 
 
 def add_to_order(request, item_pk):
@@ -9,4 +9,9 @@ def add_to_order(request, item_pk):
         order = get_or_create_order(request.session.session_key)[0]
         item = get_object_or_404(Item, pk=item_pk)
         add_item_to_order(order, item)
+    return redirect('home')
+
+
+def success_buy_order(request, order_pk):
+    delete_order(order_pk)
     return redirect('home')
