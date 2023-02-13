@@ -11,9 +11,9 @@ def get_or_create_order(session_key):
 
 
 def add_item_to_order(order, item):
-    order = OrderItem.objects.filter(order=order, item=item)
-    if order:
-        order = order.update(quantity=F('quantity')+1)
+    available_order = OrderItem.objects.filter(order=order, item=item)
+    if available_order:
+        order = available_order.update(quantity=F('quantity')+1)
     else:
-        order = OrderItem.objects.create(order=order[0], item=item)
+        order = OrderItem.objects.create(order=order, item=item)
     return order

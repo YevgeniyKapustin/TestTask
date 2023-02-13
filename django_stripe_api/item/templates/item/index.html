@@ -8,10 +8,10 @@ Buy {{ item.name }}
 <h1>Name: {{ item.name }}</h1>
 <p>Description: {{ item.description }}</p>
 <p>Price: {{ item.price }}</p>
-<button id="buy-button">Buy</button>
+<button id="buy_button">Buy</button>
 <script type="text/javascript">
     var stripe = Stripe('{{ public_key }}');
-    var buyButton = document.getElementById('buy-button');
+    var buyButton = document.getElementById('buy_button');
     buyButton.addEventListener('click', function() {
         fetch('{% url 'buy' item.pk %}')
         .then(response => response.json())

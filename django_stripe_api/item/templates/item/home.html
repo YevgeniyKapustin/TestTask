@@ -40,20 +40,20 @@ Home page
                     <div class="list-group-item">{{ item }}</div>
                 {% endfor %}
                 Total:  {{ total_price }}
-                <button id="buy-button">Buy</button>
+                <button id="buy_order_button">Buy order</button>
             {% else %}
                 <h5>You have not added items to the order yet</h5>
             {% endif %}
         </div>
     </div>
-    <script type="text/javascript">
-        var stripe = Stripe('{{ public_key }}');
-        var buyButton = document.getElementById('buy-button');
-        buyButton.addEventListener('click', function() {
-            fetch('{% url 'buy_order' order_pk %}')
-            .then(response => response.json())
-            .then(session_id => stripe.redirectToCheckout(
-            { sessionId: session_id }))});
-    </script>
 </div>
+<script type="text/javascript">
+    var stripe = Stripe('{{ public_key }}');
+    var buyButton = document.getElementById('buy_order_button');
+    buyButton.addEventListener('click', function() {
+        fetch('{% url 'buy_order' order_pk %}')
+        .then(response => response.json())
+        .then(session_id => stripe.redirectToCheckout(
+        { sessionId: session_id }))});
+</script>
 {% endblock %}
