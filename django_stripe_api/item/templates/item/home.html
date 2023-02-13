@@ -37,7 +37,11 @@ Home page
             <h3>Order:</h3>
             {% if order_items %}
                 {% for item in order_items %}
-                    <div class="list-group-item">{{ item }}</div>
+                    <div class="list-group-item">{{ item }}
+                        <a href="{% url 'delete_item_from_order' item.item.pk %}" class="btn">
+                            del
+                        </a>
+                    </div>
                 {% endfor %}
                 Total:  {{ total_price }}
                 <button id="buy_order_button">Buy order</button>

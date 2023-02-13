@@ -9,12 +9,12 @@ from item.session import get_stripe_session_for_item, \
 
 class ItemAPIView(viewsets.ViewSet):
     @staticmethod
-    def session_id_for_item(request, pk=None):
-        item = get_object_or_404(Item, pk=pk)
+    def session_id_for_item(request, item_pk):
+        item = get_object_or_404(Item, pk=item_pk)
         session = get_stripe_session_for_item(request, item)
         return Response(session.id)
 
     @staticmethod
-    def session_id_for_order(request, order_pk, pk=None):
+    def session_id_for_order(request, order_pk):
         session = get_stripe_session_for_order(request, order_pk)
         return Response(session.id)

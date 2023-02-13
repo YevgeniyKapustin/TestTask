@@ -1,10 +1,12 @@
 from django.db.models import F
+from django.shortcuts import get_object_or_404
 
+from item.models import Item
 from order.models import Order, OrderItem
 
 
 def get_or_create_order(session_key):
-    order = Order.objects.filter(session_key=session_key)
+    order = Order.objects.filter(session_key=session_key)[0]
     if not order:
         order = Order.objects.create(session_key=session_key)
     return order
@@ -21,3 +23,9 @@ def add_item_to_order(order, item):
 
 def delete_order(order_pk):
     return Order.objects.get(pk=order_pk).delete()
+
+
+def delete_item_order(request, item_pk):
+    order = get_object_or_404(Order, session_key=request.session.session_key)
+    item = get_object_or_404(Item, pk=item_pk)
+    return OrderItem.objects.get(order=order, item=item).delete()

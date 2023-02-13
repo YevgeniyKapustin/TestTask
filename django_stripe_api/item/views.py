@@ -15,7 +15,7 @@ def show_item(request, pk):
 
 
 def home(request):
-    order = get_or_create_order(request.session.session_key)[0]
+    order = get_or_create_order(request.session.session_key)
 
     context = {
         'items': Item.objects.all(),
