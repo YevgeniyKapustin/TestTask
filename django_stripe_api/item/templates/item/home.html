@@ -45,9 +45,13 @@ Home page
                 {% endfor %}
                 Total:  {{ total_price }}
                 <button id="buy_order_button">Buy order</button>
+                <a href="{% url 'add_discount' %}" class="btn">
+                    add discount 20%
+                </a>
             {% else %}
                 <h5>You have not added items to the order yet</h5>
             {% endif %}
+
         </div>
     </div>
 </div>

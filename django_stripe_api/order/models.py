@@ -22,3 +22,12 @@ class OrderItem(models.Model):
 
     def sum_item(self):
         return self.item.price * self.quantity
+
+
+class Discount(models.Model):
+    order = models.ForeignKey('Order', on_delete=models.CASCADE)
+    percent_off = models.IntegerField()
+
+
+class Tax(models.Model):
+    pass

@@ -6,10 +6,10 @@ from order.models import Order, OrderItem
 
 
 def get_or_create_order(session_key):
-    order = Order.objects.filter(session_key=session_key)[0]
+    order = Order.objects.filter(session_key=session_key)
     if not order:
         order = Order.objects.create(session_key=session_key)
-    return order
+    return order[0]
 
 
 def add_item_to_order(order, item):
