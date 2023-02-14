@@ -8,7 +8,7 @@ from order.models import Order, OrderItem
 def get_or_create_order(session_key):
     order = Order.objects.filter(session_key=session_key)
     if not order:
-        order = Order.objects.create(session_key=session_key)
+        return Order.objects.create(session_key=session_key)
     return order[0]
 
 

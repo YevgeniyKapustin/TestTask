@@ -2,7 +2,7 @@ import stripe
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 
-from order.models import OrderItem, Order, Discount
+from order.models import OrderItem, Order, Discount, Tax
 
 
 def get_stripe_session_for_item(request, item):
@@ -71,3 +71,15 @@ def create_coupon(request):
     Discount.objects.create(order=order, percent_off=20)
 
     return stripe.Coupon.create(percent_off=20)
+
+
+def create_tax(request):
+    order = get_object_or_404(Order, session_key=request.session.session_key)
+    Tax.objects.create(order=order, country='RU')
+
+    return stripe.Customer.create(
+        description="a new user",
+        email="franklin@example.com",
+        address={"country": 'RU'},
+        expand=["tax"],
+    )

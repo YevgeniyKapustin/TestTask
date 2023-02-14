@@ -1,8 +1,7 @@
 from django.shortcuts import redirect, get_object_or_404
 
 from item.models import Item
-from item.session import create_coupon
-from order.models import OrderItem
+from item.session import create_coupon, create_tax
 from order.order import get_or_create_order, add_item_to_order, delete_order, \
     delete_item_order
 
@@ -21,11 +20,11 @@ def success_buy_order(request, order_pk):
 
 
 def delete_item_from_order(request, item_pk):
-    a = OrderItem.objects.all()
     delete_item_order(request, item_pk)
     return redirect('home')
 
 
 def add_discount(request):
+    create_tax(request)
     create_coupon(request)
     return redirect('home')

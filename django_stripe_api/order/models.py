@@ -13,8 +13,8 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    item = models.ForeignKey('item.Item', on_delete=models.PROTECT)
     order = models.ForeignKey('Order', on_delete=models.CASCADE)
+    item = models.ForeignKey('item.Item', on_delete=models.PROTECT)
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
@@ -30,4 +30,5 @@ class Discount(models.Model):
 
 
 class Tax(models.Model):
-    pass
+    order = models.ForeignKey('Order', on_delete=models.CASCADE)
+    country = models.CharField(max_length=3)
