@@ -2,12 +2,9 @@
 import os
 from pathlib import Path
 
-import stripe
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
-stripe.api_key = os.getenv('STRIPE_API_KEY')
 
 DEBUG = True
 

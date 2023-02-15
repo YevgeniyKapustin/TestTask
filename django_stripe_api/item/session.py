@@ -1,27 +1,33 @@
+import os
+
 import stripe
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 
+from item.models import Currency
 from order.models import OrderItem, Order, Discount, Tax
 
 
 def get_stripe_session_for_item(request, item):
+    set_stripe_api(item)
+
     line_items = [{
             'price_data': {
-                'currency': 'usd',
+                'currency': item.currency.abbreviation,
                 'product_data': {
                     'name': item.name,
                 },
                 'unit_amount': item.price,
             },
             'quantity': 1,
-        },
-    ]
+        }]
 
     return create_stripe_session(request, line_items, reverse('home'))
 
 
 def get_stripe_session_for_order(request, order_pk):
+    set_stripe_api()
+
     order = get_object_or_404(Order, pk=order_pk)
     order_items = OrderItem.objects.filter(order=order)
     success_url = f'/success_buy/{order.pk}/'
@@ -62,7 +68,6 @@ def create_stripe_session(request, line_items, success_url):
             mode='payment',
             success_url=success_absolute_url,
         )
-
     return session
 
 
@@ -83,3 +88,12 @@ def create_tax(request):
         address={"country": 'RU'},
         expand=["tax"],
     )
+
+
+def set_stripe_api(item=None):
+    if item:
+        api_key = get_object_or_404(Currency, pk=item.currency.pk).api_key
+        stripe.api_key = api_key
+    else:
+        stripe.api_key = os.getenv('STRIPE_API_KEY')
+    return stripe.api_key

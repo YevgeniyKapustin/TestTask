@@ -12,5 +12,5 @@ class Item(models.Model):
 
 
 class Currency(models.Model):
-    symbol = models.CharField(max_length=1)
-    api_key = models.CharField(max_length=100)
+    abbreviation = models.CharField(max_length=3)
+    api_key = models.CharField(max_length=150)
