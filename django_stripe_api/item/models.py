@@ -14,3 +14,6 @@ class Item(models.Model):
 class Currency(models.Model):
     abbreviation = models.CharField(max_length=3)
     api_key = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.abbreviation

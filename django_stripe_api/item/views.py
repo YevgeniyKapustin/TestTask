@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404
 
 from django_stripe_api.settings import STRIPE_PUBLIC_KEY
 from item.models import Item
-from item.session import create_tax
 from order.models import OrderItem
 from order.order import get_or_create_order
 

@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, get_object_or_404
 
 from item.models import Item
-from item.session import create_coupon, create_tax
+from stripe_logic.stripe_logic import create_coupon, create_tax
 from order.order import get_or_create_order, add_item_to_order, delete_order, \
     delete_item_order
 

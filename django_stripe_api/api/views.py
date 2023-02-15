@@ -3,7 +3,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from item.models import Item
-from item.session import get_stripe_session_for_item, \
+from stripe_logic.stripe_logic import get_stripe_session_for_item, \
     get_stripe_session_for_order
 
 
