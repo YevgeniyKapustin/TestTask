@@ -14,7 +14,7 @@ def add_to_order(request, item_pk):
     return redirect('home')
 
 
-def success_buy_order(request, order_pk):
+def success_buy_order(order_pk):
     delete_order(order_pk)
     return redirect('home')
 
