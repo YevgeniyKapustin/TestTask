@@ -6,8 +6,6 @@ ENV PYTHONUNBUFFERED=1
 
 RUN apt update
 
-WORKDIR /kapusta
-
 COPY . .
 
 RUN pip install -r requirements.txt

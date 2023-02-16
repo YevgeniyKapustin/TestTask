@@ -10,7 +10,7 @@ services:
       - "5432:5432"
 
   site:
-    image: kapusta
+    build: .
     depends_on:
       - db
     env_file:
