@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+
+  site:
+    image: kapusta
+    depends_on:
+      - db
+    env_file:
+      - .env
+    command: >
+      bash -c "./django_stripe_api/manage.py migrate && ./django_stripe_api/manage.py runserver"
