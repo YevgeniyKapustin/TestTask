@@ -1,4 +1,4 @@
-## Подготовка к проекта
+## Подготовка к запуску
 
 ### Устанавливаем postgres:
 > sudo apt install postgresql postgresql-contrib
