@@ -2,26 +2,31 @@ from django.shortcuts import render, get_object_or_404
 
 from ..config.settings import STRIPE_PUBLIC_KEY
 from .models import Item
-from ..order.models import OrderItem
-from ..order.order import get_or_create_order
+from ..order.models import OrderItem, Order
+from ..order.services.order import ServiceOrder
 
 
-def show_item(request, pk):
-    context = {
-        'item': get_object_or_404(Item, pk=pk),
-        'public_key': STRIPE_PUBLIC_KEY
-    }
-    return render(request, 'item/index.html', context)
+def show_item(request, pk: int) -> render:
+    return render(
+        request,
+        'item/index.html',
+        {
+            'item': get_object_or_404(Item, pk=pk),
+            'public_key': STRIPE_PUBLIC_KEY
+        }
+    )
 
 
-def home(request):
-    order = get_or_create_order(request.session.session_key)
-
-    context = {
-        'items': Item.objects.all(),
-        'public_key': STRIPE_PUBLIC_KEY,
-        'order_items': OrderItem.objects.filter(order=order),
-        'total_price': order.sum_order(),
-        'order_pk': order.pk
-    }
-    return render(request, 'item/home.html', context)
+def home(request) -> render:
+    order: Order = ServiceOrder.get_or_create(request.session.session_key)
+    return render(
+        request,
+        'item/home.html',
+        {
+            'items': Item.objects.all(),
+            'public_key': STRIPE_PUBLIC_KEY,
+            'order_items': OrderItem.objects.filter(order=order),
+            'total_price': order.sum_order(),
+            'order_pk': order.pk
+        }
+    )

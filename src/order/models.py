@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import QuerySet
 
 
 class Order(models.Model):
@@ -8,11 +9,8 @@ class Order(models.Model):
         return f'Order ***{self.session_key[:4:-1]}'
 
     def sum_order(self):
-        items = OrderItem.objects.filter(order=self)
-        price = 0
-        for i in items:
-            price += i.sum_item()
-        return price
+        items: QuerySet = OrderItem.objects.filter(order=self)
+        return sum([item.sum_item() for item in items])
 
 
 class OrderItem(models.Model):
