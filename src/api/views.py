@@ -3,8 +3,8 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from stripe.checkout import Session
 
-from ..item.models import Item
-from ..services.stripe import (
+from item.models import Item
+from services.stripe import (
     get_stripe_session_for_item,
     get_stripe_session_for_order
 )

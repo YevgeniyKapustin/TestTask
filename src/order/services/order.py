@@ -2,8 +2,8 @@
 from django.db.models import F
 from django.shortcuts import get_object_or_404
 
-from ...item.models import Item
-from ..models import Order, OrderItem
+from item.models import Item
+from order.models import Order, OrderItem
 
 
 class ServiceOrder(object):

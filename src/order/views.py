@@ -1,9 +1,9 @@
 from django.shortcuts import redirect, get_object_or_404
 
-from .models import Order
-from ..item.models import Item
-from ..stripe_logic.stripe_logic import create_coupon, create_tax
-from .services.order import ServiceOrder
+from order.models import Order
+from item.models import Item
+from services.stripe import create_coupon, create_tax
+from order.services.order import ServiceOrder
 
 
 def add_to_order(request, item_pk: int) -> redirect:

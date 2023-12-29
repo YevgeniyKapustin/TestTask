@@ -6,9 +6,9 @@ from django.urls import reverse
 from stripe import Customer
 from stripe.checkout import Session
 
-from ..config import settings
-from ..item.models import Currency, Item
-from ..order.models import OrderItem, Order, Discount, Tax
+from config import settings
+from item.models import Currency, Item
+from order.models import OrderItem, Order, Discount, Tax
 
 
 def get_stripe_session_for_item(request, item: Item) -> Session:

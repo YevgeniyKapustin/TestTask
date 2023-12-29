@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 
-from ..config.settings import STRIPE_PUBLIC_KEY
-from .models import Item
-from ..order.models import OrderItem, Order
-from ..order.services.order import ServiceOrder
+from config.settings import STRIPE_PUBLIC_KEY
+from item.models import Item
+from order.models import OrderItem, Order
+from order.services.order import ServiceOrder
 
 
 def show_item(request, pk: int) -> render:
