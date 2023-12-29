@@ -11,6 +11,7 @@ djangorestframework = "^3.14.0"
 psycopg2-binary = "^2.9.9"
 setuptools = "^69.0.3"
 stripe = "^7.10.0"
+pydantic-settings = "^2.1.0"
 
 
 [build-system]
