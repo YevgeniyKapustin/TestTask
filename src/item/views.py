@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 
-from django_stripe_api.settings import STRIPE_PUBLIC_KEY
-from item.models import Item
-from order.models import OrderItem
-from order.order import get_or_create_order
+from ..config.settings import STRIPE_PUBLIC_KEY
+from .models import Item
+from ..order.models import OrderItem
+from ..order.order import get_or_create_order
 
 
 def show_item(request, pk):

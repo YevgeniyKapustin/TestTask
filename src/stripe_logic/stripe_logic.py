@@ -5,8 +5,8 @@ import stripe
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 
-from item.models import Currency
-from order.models import OrderItem, Order, Discount, Tax
+from ..item.models import Currency
+from ..order.models import OrderItem, Order, Discount, Tax
 
 
 def get_stripe_session_for_item(request, item) -> object:

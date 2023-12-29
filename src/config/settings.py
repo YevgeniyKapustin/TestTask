@@ -32,7 +32,10 @@ class DjangoSettings(BaseSettings):
         'django.contrib.messages',
         'django.contrib.staticfiles',
 
-        'main'
+        'rest_framework',
+
+        'order.apps.OrdersConfig',
+        'item.apps.MainConfig',
     ]
 
     MIDDLEWARE: list[str] = [

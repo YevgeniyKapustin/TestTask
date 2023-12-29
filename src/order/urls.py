@@ -1,6 +1,6 @@
 from django.urls import path
 
-from order.views import add_to_order, success_buy_order, \
+from ..order.views import add_to_order, success_buy_order, \
     delete_item_from_order, add_discount
 
 urlpatterns = [
