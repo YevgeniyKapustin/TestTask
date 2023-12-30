@@ -1,5 +1,6 @@
 """Model for working with orders."""
 from django.db.models import F
+from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 
 from item.models import Item
@@ -44,7 +45,7 @@ class ServiceOrder(object):
         return Order.objects.get(pk=order_pk).delete()
 
     @staticmethod
-    def delete_item(request, item_pk: int) -> OrderItem:
+    def delete_item(request: HttpRequest, item_pk: int) -> OrderItem:
         order: Order = get_object_or_404(
             Order,
             session_key=request.session.session_key

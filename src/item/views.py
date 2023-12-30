@@ -1,3 +1,4 @@
+from django.http import HttpRequest
 from django.shortcuts import render, get_object_or_404
 
 from config.settings import STRIPE_PUBLIC_KEY
@@ -6,7 +7,7 @@ from order.models import OrderItem, Order
 from order.services.order import ServiceOrder
 
 
-def show_item(request, pk: int) -> render:
+def show_item(request: HttpRequest, pk: int) -> render:
     return render(
         request,
         'item/index.html',
@@ -17,7 +18,7 @@ def show_item(request, pk: int) -> render:
     )
 
 
-def home(request) -> render:
+def home(request: HttpRequest) -> render:
     order: Order = ServiceOrder.get_or_create(request.session.session_key)
     return render(
         request,

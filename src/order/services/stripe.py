@@ -78,6 +78,12 @@ def create_stripe_session(
     )
 
     if order and Discount.objects.filter(order=order[0]):
+        payment_intent = stripe.PaymentIntent.create(
+            line_items=line_items,
+            amount=amount,
+            currency=currency,
+            discounts=[{'coupon': create_coupon(request).get('id'), }],
+        )
         session: Session = stripe.checkout.Session.create(
             line_items=line_items,
             mode='payment',
