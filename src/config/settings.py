@@ -2,6 +2,7 @@
 from pathlib import Path
 from typing import Any, List
 
+import stripe
 from dotenv import load_dotenv
 from pydantic_settings import BaseSettings
 
@@ -12,6 +13,7 @@ class DjangoSettings(BaseSettings):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.DATABASES: dict = self.__get_databases()
+        stripe.api_key = self.STRIPE_API_KEY
 
     BASE_DIR: Path = Path(__file__).resolve().parent.parent
     SECRET_KEY: str
@@ -95,10 +97,10 @@ class DjangoSettings(BaseSettings):
     STATIC_ROOT: str = Path(BASE_DIR).joinpath('static').__str__()
     STATICFILES_DIRS: list[str] = []
 
-    MEDIA_URL: str = 'media/'
-    MEDIA_ROOT: str = Path(BASE_DIR).joinpath('media').__str__()
-
     DEFAULT_AUTO_FIELD: str = 'django.db.models.BigAutoField'
+
+    STRIPE_API_KEY: str
+    STRIPE_PUBLIC_KEY: str
 
     def __get_databases(self) -> dict:
         return {

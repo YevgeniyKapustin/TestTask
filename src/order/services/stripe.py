@@ -1,6 +1,9 @@
 """Model for working with stripe."""
+from types import NoneType
+
 import stripe
 from django.db.models import QuerySet
+from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from stripe import Customer
@@ -11,7 +14,7 @@ from item.models import Currency, Item
 from order.models import OrderItem, Order, Discount, Tax
 
 
-def get_stripe_session_for_item(request, item: Item) -> Session:
+def get_stripe_session_for_item(request: HttpRequest, item: Item) -> Session:
     """Redirect to payment form from stripe for item.
     :returns: Session object.
     """
@@ -31,7 +34,10 @@ def get_stripe_session_for_item(request, item: Item) -> Session:
     return create_stripe_session(request, line_items, reverse('home'))
 
 
-def get_stripe_session_for_order(request, order_pk: int) -> Session:
+def get_stripe_session_for_order(
+        request: HttpRequest,
+        order_pk: int
+) -> Session:
     """Redirect to payment form from stripe for order.
     :returns: Session object.
     """
@@ -60,7 +66,7 @@ def get_stripe_session_for_order(request, order_pk: int) -> Session:
 
 
 def create_stripe_session(
-        request,
+        request: HttpRequest,
         line_items: list[dict],
         success_url: str
 ) -> Session:
@@ -89,7 +95,7 @@ def create_stripe_session(
     return session
 
 
-def create_coupon(request, percent_off: int = 20) -> dict:
+def create_coupon(request: HttpRequest, percent_off: int = 20) -> dict:
     """Sets a 20% discount
      :returns: Coupon dict
      """
@@ -101,7 +107,7 @@ def create_coupon(request, percent_off: int = 20) -> dict:
     return stripe.Coupon.create(percent_off=percent_off)
 
 
-def create_tax(request, country: str = 'RU') -> Customer:
+def create_tax(request: HttpRequest, country: str = 'RU') -> Customer:
     """Sets the tax for the order
     :returns: Customer stripe object.
     """
@@ -119,7 +125,7 @@ def create_tax(request, country: str = 'RU') -> Customer:
     )
 
 
-def set_stripe_api(item: None | Item = None) -> str:
+def set_stripe_api(item: NoneType | Item = None) -> str:
     """Sets api_key based on the currency.
     If an item is purchased,
     else it takes api_key from the environment.

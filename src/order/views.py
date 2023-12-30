@@ -2,7 +2,7 @@ from django.shortcuts import redirect, get_object_or_404
 
 from order.models import Order
 from item.models import Item
-from services.stripe import create_coupon, create_tax
+from order.services.stripe import create_coupon, create_tax
 from order.services.order import ServiceOrder
 
 
